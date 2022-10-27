@@ -45,16 +45,6 @@ const insertBlogPost = async (blogPost) => {
   return { type: null, message: newBlog };
 };
 
-const getAllPost = async () => {
-  const result = BlogPost.findAll({
-    include: { all: true, attributes: { exclude: ['password'] } },
-    attributes: { exclude: ['user_id'] },
-});
-
-  return result;
-};
-
 module.exports = {
   insertBlogPost,
-  getAllPost,
 };
