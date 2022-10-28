@@ -45,7 +45,7 @@ const insertBlogPost = async (blogPost) => {
   return { type: null, message: newBlog };
 };
 
-const getAllPost = async () => {
+const catchPost = async () => {
   const result = await BlogPost.findAll({
     include: { all: true, attributes: { exclude: ['password'] } },
 });
@@ -66,6 +66,6 @@ if (!result) return { type: 'error', message: 'Post does not exist' };
 
 module.exports = {
   insertBlogPost,
-  getAllPost,
+  catchPost,
   getPostById,
 };

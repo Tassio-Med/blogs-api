@@ -1,6 +1,6 @@
 const { PostService } = require('../services');
 
-const insertPost = async (req, res) => {
+const infixPost = async (req, res) => {
   const { userId } = req.auth;
   const blogPost = req.body;
   const { type, message } = await PostService.insertBlogPost({ userId, ...blogPost });
@@ -9,8 +9,8 @@ const insertPost = async (req, res) => {
   res.status(201).json(message);
 };
 
-const getAllPost = async (_req, res) => {
-  const message = await PostService.getAllPost();
+const catchPost = async (_req, res) => {
+  const message = await PostService.catchPost();
 
   res.status(200).json(message);
 };
@@ -25,7 +25,7 @@ const getPostById = async (req, res) => {
 };
 
 module.exports = {
-  insertPost,
-  getAllPost,
+  infixPost,
+  catchPost,
   getPostById,
 };
