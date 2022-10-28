@@ -29,7 +29,7 @@ const getByUserId = async (id) => {
   return { type: null, message: result };
 };
 
-const getAllUser = async () => {
+const catchUsers = async () => {
   const result = await User.findAll({ attributes: { exclude: ['password'] } });
 
   return result;
@@ -38,6 +38,6 @@ const getAllUser = async () => {
 module.exports = {
   getByEmail,
   getByUserId,
-  getAllUser,
+  catchUsers,
   insertUser,
 };

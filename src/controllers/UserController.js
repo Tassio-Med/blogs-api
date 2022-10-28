@@ -2,6 +2,10 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { UserService } = require('../services');
 
+const OK = 200;
+const BAD_REQUEST = 400;
+const NOT_FOUND = 404;
+const CONFLICT = 409;
 const secret = process.env.JWT_SECRET;
 
 const insertUser = async (req, res) => {
@@ -9,37 +13,26 @@ const insertUser = async (req, res) => {
 
   const { type, message } = await UserService.insertUser(user);
   
-  if (type === 'exist') return res.status(409).json({ message });
-  if (type) return res.status(400).json({ message });
+  if (type === 'exist') return res.status(CONFLICT).json({ message });
+  if (type) return res.status(BAD_REQUEST).json({ message });
 
-  const jwtConfig = {
-    expiresIn: '7d',
-    algorithm: 'HS256',
-  };
+  const jwtConfig = { expiresIn: '7d', algorithm: 'HS256' };
 
   const token = jwt.sign({ data: { userId: message.id } }, secret, jwtConfig);
-
   res.status(201).json({ token });
 };
 
-const getAllUser = async (_req, res) => {
-  const message = await UserService.getAllUser();
-
-  res.status(200).json(message);
+const catchUsers = async (_req, res) => {
+  const message = await UserService.catchUsers();
+  res.status(OK).json(message);
 };
 
 const getByUserId = async (req, res) => {
   const { id } = req.params;
-  
   const { type, message } = await UserService.getByUserId(id);
 
-  if (type) return res.status(404).json({ message });
-
-  res.status(200).json(message);
+  if (type) return res.status(NOT_FOUND).json({ message });
+  res.status(OK).json(message);
 };
 
-module.exports = {
-  insertUser,
-  getAllUser,
-  getByUserId,
-};
+module.exports = { insertUser, catchUsers, getByUserId };
