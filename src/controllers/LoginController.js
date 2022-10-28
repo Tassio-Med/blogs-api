@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const { UserService } = require('../services');
+const { usersServices } = require('../services');
 
 // const OK = 200;
 const BAD_REQUEST = 400;
@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     return res.status(BAD_REQUEST).json({ message: 'Some required fields are missing' });
   }
 
-  const user = await UserService.getByEmail(email);
+  const user = await usersServices.getByEmail(email);
   if (!user || user.password !== password) {
     return res.status(BAD_REQUEST).json({ message: 'Invalid fields' }); 
   }

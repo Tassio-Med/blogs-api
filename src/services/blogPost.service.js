@@ -60,12 +60,7 @@ const getPostById = async (id) => {
 });
 
 if (!result) return { type: 'error', message: 'Post does not exist' };
-
   return { type: null, message: result };
 };
 
-module.exports = {
-  insertBlogPost,
-  catchPost,
-  getPostById,
-};
+module.exports = { insertBlogPost, catchPost, getPostById };

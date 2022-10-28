@@ -1,8 +1,8 @@
 const { Category } = require('../models');
-const { validateCategory } = require('./validation/validationSchema');
+const { categoryValidation } = require('./validation/validationSchema');
 
 const infixCategories = async (name) => {
-  const { type, message } = validateCategory(name);
+  const { type, message } = categoryValidation(name);
 
   if (type) return { type, message };
 

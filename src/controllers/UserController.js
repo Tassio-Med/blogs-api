@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const { UserService } = require('../services');
+const { usersServices } = require('../services');
 
 const OK = 200;
 const BAD_REQUEST = 400;
@@ -11,7 +11,7 @@ const secret = process.env.JWT_SECRET;
 const insertUser = async (req, res) => {
   const user = req.body;
 
-  const { type, message } = await UserService.insertUser(user);
+  const { type, message } = await usersServices.insertUser(user);
   
   if (type === 'exist') return res.status(CONFLICT).json({ message });
   if (type) return res.status(BAD_REQUEST).json({ message });
@@ -23,13 +23,13 @@ const insertUser = async (req, res) => {
 };
 
 const catchUsers = async (_req, res) => {
-  const message = await UserService.catchUsers();
+  const message = await usersServices.catchUsers();
   res.status(OK).json(message);
 };
 
 const getByUserId = async (req, res) => {
   const { id } = req.params;
-  const { type, message } = await UserService.getByUserId(id);
+  const { type, message } = await usersServices.getByUserId(id);
 
   if (type) return res.status(NOT_FOUND).json({ message });
   res.status(OK).json(message);
