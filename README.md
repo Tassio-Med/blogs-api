@@ -3,6 +3,7 @@
  Neste projeto foi desenvolvida uma API e um banco de dados para a produção de conteúdo para um blog! A aplicação foi desenvolvida em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
 
 <br>
+
 Criação, Leitura, Atualização e Exclusão (ou `CRUD` - _Create, Read, Update_ e _Delete_).
   
   <br>
