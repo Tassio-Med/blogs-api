@@ -16,7 +16,7 @@ Criação, Leitura, Atualização e Exclusão (ou `CRUD` - _Create, Read, Update
   3. Foram utilizadas categorias para os posts, trabalhando, assim, a **relação de** `posts` para `categories` e de `categories` para `posts`.
 
 
-<br>
+
 
 ### As principais habilidades colocadas prática nesse projeto foram:
 
